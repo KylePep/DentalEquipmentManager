@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: dental-equipment-db
+    environment:
+      POSTGRES_USER: dental
+      POSTGRES_PASSWORD: dental
+      POSTGRES_DB: dental_equipment
+    # Host port 5433 to avoid colliding with a local/other-project Postgres on 5432.
+    ports:
+      - "5433:5432"
+    volumes:
+      - dental-equipment-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dental -d dental_equipment"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  dental-equipment-pgdata:

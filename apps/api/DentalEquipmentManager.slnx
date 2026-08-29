@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DentalEquipmentManager.Api.Tests/DentalEquipmentManager.Api.Tests.csproj" />
+  <Project Path="DentalEquipmentManager.Api/DentalEquipmentManager.Api.csproj" />
+</Solution>
