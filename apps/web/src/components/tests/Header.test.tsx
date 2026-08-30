@@ -10,4 +10,9 @@ describe("Header", () => {
       screen.getByRole("heading", { name: /Dental Equipment Manager/i })
     ).toBeInTheDocument();
   });
+
+  it("renders a link to the home page", () => {
+    render(<Header />);
+    expect(screen.getByRole("link", { name: /Home/i })).toHaveAttribute("href", "/");
+  });
 });
