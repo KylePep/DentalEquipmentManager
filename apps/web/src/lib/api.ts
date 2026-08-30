@@ -29,5 +29,10 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   listEquipment: () => request<Equipment[]>("/api/equipment"),
+  createEquipment: (equipment: Omit<Equipment, "id" | "createdAt">) =>
+    request<Equipment>("/api/equipment", {
+      method: "POST",
+      body: JSON.stringify(equipment),
+    }),
   health: () => request<{ status: string }>("/health"),
 };
