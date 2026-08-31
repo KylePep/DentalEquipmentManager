@@ -38,6 +38,19 @@ public static class EquipmentEndpoints
             return Results.Created($"/api/equipment/{equipment.Id}", equipment);
         });
 
+        group.MapDelete("/{id:int}", async (int id, AppDbContext db) =>
+        {
+            var equipment = await db.Equipment.FindAsync(id);
+            if (equipment is null)
+                return Results.NotFound();
+
+            db.Equipment.Remove(equipment);
+            await db.SaveChangesAsync();
+
+            return Results.NoContent();
+        }
+        );
+
         return routes;
     }
 }

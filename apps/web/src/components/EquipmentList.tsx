@@ -1,3 +1,4 @@
+import { deleteEquipmentAction } from "@/app/actions";
 import type { Equipment } from "@/lib/api";
 
 export function EquipmentList({ equipment }: { equipment: Equipment[] }) {
@@ -12,9 +13,12 @@ export function EquipmentList({ equipment }: { equipment: Equipment[] }) {
   return (
     <ul>
       {equipment.map((item) => (
-        <li key={item.id}>
+        <li key={item.id} className="flex justify-between border-b border-stone-700 py-1">
           {item.name}
           {item.manufacturer ? ` — ${item.manufacturer}` : ""}
+          <form action={deleteEquipmentAction.bind(null, item.id)}>
+            <button type="submit" className="bg-red-800 text-white px-1 rounded text-xs hover:bg-red-900 hover:cursor-pointer">Delete</button>
+          </form>
         </li>
       ))}
     </ul>

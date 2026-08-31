@@ -12,3 +12,8 @@ export async function createEquipmentAction(formData: FormData) {
   });
   revalidatePath("/"); // Revalidate the home page to show the new equipment
 }
+
+export async function deleteEquipmentAction (id: number){
+  await api.deleteEquipment(id);
+  revalidatePath("/");
+}

@@ -24,6 +24,10 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     throw new Error(`API ${response.status} for ${path}`);
   }
 
+  if(response.status === 204){
+    return undefined as T;
+  }
+
   return response.json() as Promise<T>;
 }
 
@@ -33,6 +37,10 @@ export const api = {
     request<Equipment>("/api/equipment", {
       method: "POST",
       body: JSON.stringify(equipment),
+    }),
+  deleteEquipment: (id: number) =>
+    request<Equipment>(`/api/equipment/${id}`, {
+      method: "DELETE",
     }),
   health: () => request<{ status: string }>("/health"),
 };
