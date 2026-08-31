@@ -14,16 +14,17 @@ export default async function Home() {
   const { equipment, error } = await loadEquipment();
 
   return (
-    <div className="p-4">
+    <div className="flex flex-col gap-4 p-4">
+      <section>
+        <h2 className="text-lg font-bold">Create Equipment</h2>
+        <p>Use the form below to create new equipment.</p>
+        <CreateEquipment />
+      </section>
 
-      <p>Frontend (Next.js) talking to the backend (.NET API).</p>
-
-      <h2>Create Equipment</h2>
-      <p>Use the form below to create new equipment.</p>
-      <CreateEquipment />
-
-      <h2>Equipment</h2>
-      {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
+      <section>
+        <h2 className="text-lg font-bold">Equipment</h2>
+        {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
+      </section>
     </div>
   );
 }
