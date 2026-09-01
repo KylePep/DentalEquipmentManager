@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="h-screen flex flex-col bg-black">
         <Header />
-        <main className="flex-grow">
+        <main className="flex flex-row flex-grow">
           {children}
         </main>
         <Footer />
