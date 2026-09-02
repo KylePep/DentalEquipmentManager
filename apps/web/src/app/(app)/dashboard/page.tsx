@@ -1,6 +1,8 @@
 import { api, type Equipment } from "@/lib/api";
 import { EquipmentList } from "@/components/EquipmentList";
 import { CreateEquipment } from "@/components/CreateEquipment";
+import { PageWrapper } from "@/components/PageWrapper";
+import { Heading } from "@/components/Heading";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {
@@ -14,18 +16,18 @@ export default async function Dashboard() {
   const { equipment, error } = await loadEquipment();
 
   return (
-    <div className="flex flex-col gap-4 p-4 flex-grow">
-      <h1 className="text-xl font-black">Dashboard</h1>
+    <PageWrapper>
+      <Heading level={1}>Dashboard</Heading>
       <section>
-        <h2 className="text-lg font-bold">Create Equipment</h2>
+        <Heading level={2}>Create Equipment</Heading>
         <p>Use the form below to create new equipment.</p>
         <CreateEquipment />
       </section>
 
       <section>
-        <h2 className="text-lg font-bold">Equipment</h2>
+        <Heading level={2}>Equipment</Heading>
         {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
       </section>
-    </div>
+    </PageWrapper>
   );
 }
