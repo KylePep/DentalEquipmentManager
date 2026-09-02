@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 import { CreateEquipment } from "./CreateEquipment";
 
-export function CreateEquipmentModal() {
+export function EquipmentCreation() {
   const [open, setOpen] = useState(false);
 
   return (

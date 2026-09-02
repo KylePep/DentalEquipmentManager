@@ -2,7 +2,7 @@ import { api, type Equipment } from "@/lib/api";
 import { EquipmentList } from "@/components/EquipmentList";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Heading } from "@/components/Heading";
-import { CreateEquipmentModal } from "@/components/CreateEquipmentModal";
+import { EquipmentCreation } from "@/components/EquipmentCreation";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {
@@ -19,14 +19,23 @@ export default async function Dashboard() {
     <PageWrapper>
       <Heading level={1}>Dashboard</Heading>
       <section>
-        <Heading level={2}>Create Equipment</Heading>
-        <p>Use the form below to create new equipment.</p>
-        <CreateEquipmentModal />
+        <Heading level={2}>Equipment</Heading>
       </section>
 
       <section>
-        <Heading level={2}>Equipment</Heading>
-        {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
+        <Heading level={2}>Scheduled Maintenance</Heading>
+      </section>
+
+      <section>
+        <Heading level={2}>Failure Prediction</Heading>
+      </section>
+
+      <section>
+        <Heading level={2}>Diagnostic</Heading>
+      </section>
+
+      <section>
+        <Heading level={2}>User Manuals</Heading>
       </section>
 
     </PageWrapper>
