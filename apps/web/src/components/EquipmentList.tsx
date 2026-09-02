@@ -21,7 +21,7 @@ export function EquipmentList({ equipment }: { equipment: Equipment[] }) {
       <div className="bg-stone-800 rounded p-4">
         <table className="w-full">
           <thead>
-            <tr className="border-b-2 border-stone-400">
+            <tr className="border-b-1 border-stone-400">
               {Object.entries(equipmentColumns).map(([label, key]) => (
                 <th key={key} className="text-start">
                   {label}
