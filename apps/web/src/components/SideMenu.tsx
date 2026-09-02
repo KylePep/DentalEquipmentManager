@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Route } from "next";
+import { NavLink } from "./NavLink";
 
 type NavItem = { href: Route; label: string; className: string };
 
@@ -11,14 +11,6 @@ const primary: NavItem[] = [
 const secondary: NavItem[] = [
   { href: "/settings", label: "Settings", className: "border-stone-600 hover:border-stone-950" },
 ];
-
-function NavLink({ href, label, className }: NavItem) {
-  return (
-    <Link href={href} className={`text-stone-300 hover:text-stone-100 px-2 rounded-xs text-center border-b-2 duration-300 ${className}`}>
-      {label}
-    </Link>
-  );
-}
 
 export function SideMenu() {
   return (
