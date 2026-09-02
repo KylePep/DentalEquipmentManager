@@ -1,8 +1,8 @@
 import { api, type Equipment } from "@/lib/api";
 import { EquipmentList } from "@/components/EquipmentList";
-import { CreateEquipment } from "@/components/CreateEquipment";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Heading } from "@/components/Heading";
+import { CreateEquipmentModal } from "@/components/CreateEquipmentModal";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {
@@ -21,13 +21,14 @@ export default async function Dashboard() {
       <section>
         <Heading level={2}>Create Equipment</Heading>
         <p>Use the form below to create new equipment.</p>
-        <CreateEquipment />
+        <CreateEquipmentModal />
       </section>
 
       <section>
         <Heading level={2}>Equipment</Heading>
         {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
       </section>
+
     </PageWrapper>
   );
 }
