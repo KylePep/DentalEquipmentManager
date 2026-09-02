@@ -13,7 +13,7 @@ export function EquipmentList({ equipment }: { equipment: Equipment[] }) {
   return (
     <ul>
       {equipment.map((item) => (
-        <li key={item.id} className="flex justify-between border-b border-stone-700 py-1 max-w-xl">
+        <li key={item.id} className="flex justify-between border-b border-stone-700 py-1">
           {item.name}
           {item.manufacturer ? ` — ${item.manufacturer}` : ""}
           <form action={deleteEquipmentAction.bind(null, item.id)}>

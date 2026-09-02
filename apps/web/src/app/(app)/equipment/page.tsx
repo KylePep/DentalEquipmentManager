@@ -1,6 +1,5 @@
 import { api, type Equipment } from "@/lib/api";
 import { EquipmentList } from "@/components/EquipmentList";
-import { CreateEquipment } from "@/components/CreateEquipment";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {
@@ -10,22 +9,16 @@ async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string 
   }
 }
 
-export default async function Dashboard() {
+export default async function EquipmentPage() {
   const { equipment, error } = await loadEquipment();
 
   return (
     <div className="flex flex-col gap-4 p-4 flex-grow">
-      <h1 className="text-xl font-black">Dashboard</h1>
-      <section>
-        <h2 className="text-lg font-bold">Create Equipment</h2>
-        <p>Use the form below to create new equipment.</p>
-        <CreateEquipment />
-      </section>
-
+      <h1 className="text-xl font-black">Equipment List</h1>
       <section>
         <h2 className="text-lg font-bold">Equipment</h2>
         {error ? <p role="alert">{error}</p> : <EquipmentList equipment={equipment} />}
       </section>
     </div>
-  );
+  )
 }
