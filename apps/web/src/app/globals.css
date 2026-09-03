@@ -34,12 +34,63 @@ body {
 }
 
 a {
-  /* color: inherit; */
   text-decoration: none;
 }
 
 button:hover {
   cursor: pointer;
+}
+
+/* CALENDAR */
+/* outer border */
+.rbc-month-view,
+.rbc-time-view {
+  border-color: #ededed;
+}
+
+/* gridlines */
+.rbc-header,
+.rbc-time-header-content,
+.rbc-day-bg+.rbc-day-bg,
+.rbc-month-row+.rbc-month-row {
+  border-color: #ededed !important;
+}
+
+/* days outside the month */
+.rbc-off-range-bg {
+  background-color: #0a0a0a !important;
+}
+
+/* today's cell highlight */
+.rbc-today {
+  background-color: black !important;
+}
+
+/* toolbar buttons (bg, border, .rbc-active, :hover) */
+.rbc-toolbar button {
+  background-color: #171717 !important;
+  border-color: white !important;
+  color: white !important;
+}
+
+.rbc-toolbar button:hover {
+  background-color: black !important;
+}
+
+/* event pill (has its own bg — usually leave or theme to your accent) */
+.rbc-event {
+  background-color: #ff5e00 !important;
+}
+
+/* the "+2 more" link */
+.rbc-show-more {
+  background-color: #ff5e00;
+}
+
+/* Day indicator */
+.rbc-current-time-indicator {
+  background-color: #ff5e00 !important;
+  height: 4px;
 }
 
 @media (prefers-color-scheme: dark) {

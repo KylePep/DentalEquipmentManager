@@ -3,6 +3,7 @@ import { EquipmentList } from "@/components/EquipmentList";
 import { PageWrapper } from "@/components/PageWrapper";
 import { Heading } from "@/components/Heading";
 import { EquipmentCreation } from "@/components/EquipmentCreation";
+import { MaintenanceCalendar } from "@/components/MaintenanceCalendar";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {
@@ -24,6 +25,7 @@ export default async function Dashboard() {
 
       <section>
         <Heading level={2}>Scheduled Maintenance</Heading>
+        <MaintenanceCalendar />
       </section>
 
       <section>
