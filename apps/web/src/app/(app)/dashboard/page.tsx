@@ -19,13 +19,15 @@ export default async function Dashboard() {
   return (
     <PageWrapper>
       <Heading level={1}>Dashboard</Heading>
-      <section>
-        <Heading level={2}>Equipment</Heading>
-      </section>
 
       <section>
         <Heading level={2}>Scheduled Maintenance</Heading>
         <MaintenanceCalendar />
+        <MaintenanceCalendar />
+      </section>
+
+      <section>
+        <Heading level={2}>Equipment</Heading>
       </section>
 
       <section>
