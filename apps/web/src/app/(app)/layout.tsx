@@ -2,11 +2,9 @@ import { SideMenu } from "@/components/SideMenu";
 
 export default function AppLayout({ children }: LayoutProps<"/">) {
   return (
-    <>
-      <main className="flex flex-row w-full">
-        <SideMenu />
-        {children}
-      </main>
-    </>
+    <div className="flex flex-row w-full min-h-0 flex-grow">
+      <SideMenu />
+      {children}
+    </div>
   );
 }

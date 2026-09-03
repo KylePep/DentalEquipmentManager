@@ -23,7 +23,6 @@ export default async function Dashboard() {
       <section>
         <Heading level={2}>Scheduled Maintenance</Heading>
         <MaintenanceCalendar />
-        <MaintenanceCalendar />
       </section>
 
       <section>

@@ -4,7 +4,7 @@ interface PageWWrapperProps {
 
 export function PageWrapper({ children }: PageWWrapperProps) {
   return (
-    <div className="flex flex-col flex-grow gap-4 p-4 overflow-y-auto">
+    <div className="flex flex-col flex-grow min-h-0 gap-4 p-4 overflow-y-auto">
       {children}
     </div>
   )
