@@ -14,7 +14,13 @@ export async function createEquipmentAction(formData: FormData) {
 }
 
 export async function updateEquipmentAction(equipmentId: number, formData: FormData){
-  //Placeholder
+  await api.updateEquipment(equipmentId, {
+    name: String(formData.get("name")),
+    manufacturer: (formData.get("manufacturer") as string | null) ?? null,
+    serialNumber: (formData.get("serialNumber") as string | null) ?? null,
+    purchaseDate: (formData.get("purchaseDate") as string | null) ?? null,
+  });
+  revalidatePath("/");
 }
 
 export async function deleteEquipmentAction (id: number){

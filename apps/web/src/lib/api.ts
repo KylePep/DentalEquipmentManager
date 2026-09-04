@@ -39,6 +39,11 @@ export const api = {
       method: "POST",
       body: JSON.stringify(equipment),
     }),
+  updateEquipment: (id: number, equipment: Omit<Equipment, "id" | "createdAt">) =>
+    request<Equipment>(`/api/equipment/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(equipment),
+    }),
   deleteEquipment: (id: number) =>
     request<Equipment>(`/api/equipment/${id}`, {
       method: "DELETE",
