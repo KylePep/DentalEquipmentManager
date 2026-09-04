@@ -33,6 +33,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   listEquipment: () => request<Equipment[]>("/api/equipment"),
+  getEquipment: (id: number) => request<Equipment>(`/api/equipment/${id}`),
   createEquipment: (equipment: Omit<Equipment, "id" | "createdAt">) =>
     request<Equipment>("/api/equipment", {
       method: "POST",
