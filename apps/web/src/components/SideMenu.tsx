@@ -21,7 +21,7 @@ export function SideMenu() {
   return (
     <>
 
-      <div className={`h-full flex flex-col gap-4 justify-end items-center bg-stone-900 duration-300 transition-all py-4 px-2 overflow-hidden ${open ? 'min-w-42' : 'w-12'}`}>
+      <div className={`h-full flex flex-col gap-4 shrink-0 justify-end items-center bg-stone-900 transition-all duration-300 ease-in-out py-4 px-2 overflow-hidden ${open ? 'w-42' : 'w-12'}`}>
         {open && (
           <section className="flex flex-col gap-2 w-full">
             {primary.map((i) => <NavLink key={i.href} {...i} />)}

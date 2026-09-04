@@ -5,6 +5,7 @@ import type { Equipment } from "@/lib/api";
 import { EditEquipment } from "./EditEquipment";
 import { DeletingEquipment } from "./DeletingEquipment";
 import { Modal } from "./Modal";
+import Link from "next/link";
 
 const equipmentColumns: Record<string, keyof Equipment> = {
   'Name': 'name',
@@ -57,6 +58,9 @@ export function EquipmentList({ equipment }: { equipment: Equipment[] }) {
                   <td key={key}>{String(item[key])}</td>
                 ))}
                 <td className="flex gap-2">
+                  <div>
+                    <Link href={"/equipment/1"} className="bg-green-800 text-white py-0 px-1 rounded text-xs hover:bg-green-950 hover:cursor-pointer duration-300 ease-in-out">Select</Link>
+                  </div>
                   <div>
                     <button onClick={() => setDialog({ mode: "edit", item })} className="bg-yellow-800 text-white py-0 px-1 rounded text-xs hover:bg-yellow-950 hover:cursor-pointer duration-300 ease-in-out">Edit</button>
                   </div>
