@@ -7,7 +7,13 @@ export default function equipmentDetailPage() {
     <PageWrapper>
       <Heading level={1}>Equipment Detail</Heading>
       <Heading level={2}>Dental chair</Heading>
-      <Image className="w-1/2 rounded-lg border-4 border-stone-700 shadow shadow-stone-900" src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"} alt="dental chair" width={600} height={400}></Image>
+      <Image
+        className="w-1/2 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
+        src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
+        alt="dental chair"
+        width={600}
+        height={400}
+      />
     </PageWrapper>
   )
 }
