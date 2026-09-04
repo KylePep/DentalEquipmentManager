@@ -12,6 +12,8 @@ export default function equipmentDetailPage() {
         <Heading level={2}>Details</Heading>
         <p>Name: Dental Chair</p>
         <p>Manufacturer: DenistsRS</p>
+        <p>Purchase Date: 01/01/99</p>
+        <p>Manufacture Date: 01/01/99</p>
         <Image
           className="w-1/2 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
           src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
