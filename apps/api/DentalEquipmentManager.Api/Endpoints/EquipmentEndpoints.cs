@@ -4,10 +4,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DentalEquipmentManager.Api.Endpoints;
 
-/// <summary>
-/// Example CRUD-ish endpoints for <see cref="Equipment"/>. Enough to prove the
-/// web -> API -> database wiring end to end; extend as real features are added.
-/// </summary>
 public static class EquipmentEndpoints
 {
     public static IEndpointRouteBuilder MapEquipmentEndpoints(this IEndpointRouteBuilder routes)

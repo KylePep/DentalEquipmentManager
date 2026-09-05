@@ -29,6 +29,7 @@ app.UseCors(WebAppCorsPolicy);
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" })).WithTags("Health");
 app.MapEquipmentEndpoints();
+app.MapMaintenanceEventEndpoints();
 
 app.Run();
 
