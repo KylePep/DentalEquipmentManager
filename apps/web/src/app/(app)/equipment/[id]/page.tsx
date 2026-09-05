@@ -5,6 +5,7 @@ import { PageWrapper } from "@/components/Layout/PageWrapper";
 import { api } from "@/lib/api";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { EventCreation } from "@/components/Maintenance/EventCreation";
 
 export default async function EquipmentDetailPage({ params }: PageProps<'/equipment/[id]'>) {
   const { id } = await params;
@@ -80,7 +81,7 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
       <section>
         <div className="flex justify-between">
           <Heading level={2}>Maintenance</Heading>
-          <button className="bg-yellow-800 text-white py-0 px-1 rounded text-xs hover:bg-yellow-950 hover:cursor-pointer duration-300 ease-in-out">Create Maintenance Event</button>
+          <EventCreation equipment={equipment} />
         </div>
 
         <Heading level={3}>Warnings</Heading>
