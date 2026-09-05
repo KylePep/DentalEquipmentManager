@@ -21,4 +21,6 @@ public class Equipment
     public DateOnly? ManufacturerDate { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+
+    public List<MaintenanceEvent> MaintenanceEvents { get; set; } = [];
 }

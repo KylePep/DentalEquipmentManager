@@ -46,9 +46,9 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
 
   return (
     <PageWrapper>
-      {/* <pre>
+      <pre>
         {JSON.stringify(equipment, null, 2)}
-      </pre> */}
+      </pre>
       <Heading level={1}>Equipment</Heading>
 
       <section>

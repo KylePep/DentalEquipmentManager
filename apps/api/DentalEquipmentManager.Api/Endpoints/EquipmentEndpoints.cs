@@ -14,9 +14,17 @@ public static class EquipmentEndpoints
             await db.Equipment.OrderBy(e => e.Name).ToListAsync());
 
         group.MapGet("/{id:int}", async (int id, AppDbContext db) =>
-            await db.Equipment.FindAsync(id) is { } equipment
-                ? Results.Ok(equipment)
-                : Results.NotFound());
+        {
+            var equipment = await db.Equipment
+            .Include(e => e.MaintenanceEvents)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.Id == id);
+
+            return equipment is not null
+            ? Results.Ok(equipment)
+            : Results.NotFound();
+
+        });
 
         group.MapPost("/", async (CreateEquipmentRequest request, AppDbContext db) =>
         {

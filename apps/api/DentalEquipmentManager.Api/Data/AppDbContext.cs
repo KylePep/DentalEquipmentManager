@@ -6,7 +6,7 @@ namespace DentalEquipmentManager.Api.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Equipment> Equipment => Set<Equipment>();
-    public DbSet<MaintenanceEvent> MaintenanceEvent => Set<MaintenanceEvent>();
+    public DbSet<MaintenanceEvent> MaintenanceEvents => Set<MaintenanceEvent>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,9 +19,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.Entity<MaintenanceEvent>(entity =>
         {
+            entity.HasOne(e => e.Equipment)
+            .WithMany(e => e.MaintenanceEvents)
+            .HasForeignKey(e => e.EquipmentId);
+
             entity.Property(e => e.Name).HasMaxLength(200).IsRequired();
             entity.Property(e => e.Description).HasMaxLength(1200);
-            entity.Property(e => e.Date);
         });
     }
 }
