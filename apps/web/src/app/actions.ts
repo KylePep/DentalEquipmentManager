@@ -31,3 +31,14 @@ export async function deleteEquipmentAction (id: number){
   await api.deleteEquipment(id);
   revalidatePath("/");
 }
+
+export async function CreateMaintenanceEventAction(formData: FormData) {
+  const equipmentId = Number(formData.get("equipmentId"));
+  await api.createMaintenanceEvent({
+    equipmentId,
+    name: String(formData.get("name")),
+    date: String(formData.get("date")),
+    description: String(formData.get("description")),
+  });
+  revalidatePath(`/equipment/${equipmentId}`);
+}

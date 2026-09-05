@@ -20,7 +20,7 @@ export function MaintenanceEventCreation({ equipment }: EventCreationProps) {
         onClose={() => setOpen(false)}
         title={`Create a Maintenance Event for ${equipment.name}`}
       >
-        <CreateMaintenanceEvent equipmentId={equipment.id} />
+        <CreateMaintenanceEvent equipmentId={equipment.id} onSaved={() => setOpen(false)} />
       </Modal>
     </>
   )

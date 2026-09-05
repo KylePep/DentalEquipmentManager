@@ -13,6 +13,15 @@ export interface Equipment {
   manufacturerDate: string | null;
   description: string | null;
   createdAt: string;
+  maintenanceEvents: MaintenanceEvent[];
+}
+
+export interface MaintenanceEvent {
+  id: number;
+  equipmentId: number;
+  name: string;
+  description: string | null;
+  date: string;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -49,6 +58,13 @@ export const api = {
   deleteEquipment: (id: number) =>
     request<Equipment>(`/api/equipment/${id}`, {
       method: "DELETE",
+    }),
+
+  // Maintenance Event
+  createMaintenanceEvent: (maintenanceEvent: Omit<MaintenanceEvent, "id" | "createdAt">) =>
+    request<MaintenanceEvent>("/api/maintenance-events", {
+      method: "POST",
+      body: JSON.stringify(maintenanceEvent),
     }),
   health: () => request<{ status: string }>("/health"),
 };

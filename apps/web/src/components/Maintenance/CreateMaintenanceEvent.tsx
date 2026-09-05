@@ -1,13 +1,21 @@
+import { CreateMaintenanceEventAction } from "@/app/actions";
 import { useState } from "react";
 
 interface CreateEventProps {
   equipmentId: number;
+  onSaved: () => void;
 }
 
-export function CreateMaintenanceEvent({ equipmentId }: CreateEventProps) {
+export function CreateMaintenanceEvent({ equipmentId, onSaved }: CreateEventProps) {
   const [pending, setPending] = useState(false);
 
-  async function handleSubmit() { }
+  async function handleSubmit(formData: FormData) {
+    setPending(true);
+    formData.set("equipmentId", equipmentId.toString());
+    await CreateMaintenanceEventAction(formData);
+    setPending(false);
+    onSaved();
+  }
 
   return (
     <form action={handleSubmit} className="flex flex-col gap-4 p-4 bg-stone-800 rounded max-w-xl">
@@ -32,11 +40,12 @@ export function CreateMaintenanceEvent({ equipmentId }: CreateEventProps) {
         </textarea>
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="purchaseDate">Date:</label>
+        <label htmlFor="date">Date:</label>
         <input
-          id="purchaseDate"
-          name="purchaseDate"
+          id="date"
+          name="date"
           type="date"
+          required
           maxLength={120}
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
       </div>

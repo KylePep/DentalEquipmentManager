@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace DentalEquipmentManager.Api.Domain;
 
 public class MaintenanceEvent
@@ -6,6 +8,7 @@ public class MaintenanceEvent
 
   public int EquipmentId { get; set; }
 
+  [JsonIgnore]
   public Equipment Equipment { get; set; } = null!;
 
   public required string Name { get; set; }

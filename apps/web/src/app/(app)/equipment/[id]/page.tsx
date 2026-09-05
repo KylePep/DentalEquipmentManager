@@ -91,9 +91,9 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
         </ul>
         <Heading level={3}>Events</Heading>
         <ul className="flex flex-col gap-2 mb-4">
-          <li className="border-b"><span>•</span> Tune the drip pan - 3/3/26 - reoccurring - 1/month</li>
-          <li className="border-b"><span>•</span> Tune the drip pan - 3/3/26 - reoccurring - 1/bi-annually(6-month)</li>
-          <li className="border-b"><span>•</span> Align sprockets - 4/4/26 - reoccurring - 1/year</li>
+          {equipment.maintenanceEvents.map((event) => (
+            <li key={event.id} className="border-b"><span>•</span> {event.name} - {event.date} - reoccurring - 1/month</li>
+          ))}
         </ul>
         <Heading level={3}>Schedule</Heading>
         <MaintenanceCalendar />
