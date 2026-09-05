@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Equipment } from "@/lib/api";
 import { EditEquipment } from "./EditEquipment";
 import { DeletingEquipment } from "./DeletingEquipment";
-import { Modal } from "./Modal";
+import { Modal } from "../Layout/Modal";
 import Link from "next/link";
 
 const equipmentColumns: Record<string, keyof Equipment> = {

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { CreateEquipment } from "../CreateEquipment";
+import { CreateEquipment } from "../Equipment/CreateEquipment";
 import { createEquipmentAction } from "@/app/actions";
 
 vi.mock("@/app/actions", () => ({

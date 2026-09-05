@@ -1,8 +1,8 @@
 import { api, type Equipment } from "@/lib/api";
-import { Heading } from "@/components/Heading";
-import { EquipmentList } from "@/components/EquipmentList";
-import { PageWrapper } from "@/components/PageWrapper";
-import { EquipmentCreation } from "@/components/EquipmentCreation";
+import { Heading } from "@/components/Layout/Heading";
+import { EquipmentList } from "@/components/Equipment/EquipmentList";
+import { PageWrapper } from "@/components/Layout/PageWrapper";
+import { EquipmentCreation } from "@/components/Equipment/EquipmentCreation";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {

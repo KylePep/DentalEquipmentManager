@@ -1,9 +1,9 @@
 import { api, type Equipment } from "@/lib/api";
-import { EquipmentList } from "@/components/EquipmentList";
-import { PageWrapper } from "@/components/PageWrapper";
-import { Heading } from "@/components/Heading";
-import { EquipmentCreation } from "@/components/EquipmentCreation";
-import { MaintenanceCalendar } from "@/components/MaintenanceCalendar";
+import { EquipmentList } from "@/components/Equipment/EquipmentList";
+import { PageWrapper } from "@/components/Layout/PageWrapper";
+import { Heading } from "@/components/Layout/Heading";
+import { EquipmentCreation } from "@/components/Equipment/EquipmentCreation";
+import { MaintenanceCalendar } from "@/components/Maintenance/MaintenanceCalendar";
 
 async function loadEquipment(): Promise<{ equipment: Equipment[]; error: string | null }> {
   try {

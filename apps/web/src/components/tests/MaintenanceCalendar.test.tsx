@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import { MaintenanceCalendar, type MaintenanceEvent } from "../MaintenanceCalendar";
+import { MaintenanceCalendar, type MaintenanceEvent } from "../Maintenance/MaintenanceCalendar";
 
 const may = (day: number) => new Date(2026, 4, day, 9, 0, 0);
 

@@ -1,7 +1,7 @@
-import { EquipmentEditor } from "@/components/EquipmentEditor";
-import { Heading } from "@/components/Heading";
-import { MaintenanceCalendar } from "@/components/MaintenanceCalendar";
-import { PageWrapper } from "@/components/PageWrapper";
+import { EquipmentEditor } from "@/components/Equipment/EquipmentEditor";
+import { Heading } from "@/components/Layout/Heading";
+import { MaintenanceCalendar } from "@/components/Maintenance/MaintenanceCalendar";
+import { PageWrapper } from "@/components/Layout/PageWrapper";
 import { api } from "@/lib/api";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -78,7 +78,11 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
       </section>
 
       <section>
-        <Heading level={2}>Maintenance</Heading>
+        <div className="flex justify-between">
+          <Heading level={2}>Maintenance</Heading>
+          <button className="bg-yellow-800 text-white py-0 px-1 rounded text-xs hover:bg-yellow-950 hover:cursor-pointer duration-300 ease-in-out">Create Maintenance Event</button>
+        </div>
+
         <Heading level={3}>Warnings</Heading>
         <ul className="flex flex-col gap-2 mb-4">
           <li className="border-b border-yellow-500"><span className="text-yellow-500">•</span> Drip pan tuning overdue</li>

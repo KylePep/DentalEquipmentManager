@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { Header } from "../Header";
+import { Header } from "../Layout/Header";
 
 describe("Header", () => {
   it("renders a banner landmark with the application title", () => {

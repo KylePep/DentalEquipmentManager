@@ -1,4 +1,4 @@
-import { SideMenu } from "@/components/SideMenu";
+import { SideMenu } from "@/components/Layout/SideMenu";
 
 export default function AppLayout({ children }: LayoutProps<"/">) {
   return (

@@ -1,4 +1,4 @@
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/Layout/PageWrapper";
 import Link from "next/dist/client/link";
 
 export default async function Home() {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { EquipmentList } from "../EquipmentList";
+import { EquipmentList } from "../Equipment/EquipmentList";
 import type { Equipment } from "@/lib/api";
 
 function makeEquipment(overrides: Partial<Equipment> = {}): Equipment {

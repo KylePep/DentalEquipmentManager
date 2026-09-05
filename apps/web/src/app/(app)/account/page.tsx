@@ -1,5 +1,5 @@
-import { Heading } from "@/components/Heading";
-import { PageWrapper } from "@/components/PageWrapper";
+import { Heading } from "@/components/Layout/Heading";
+import { PageWrapper } from "@/components/Layout/PageWrapper";
 
 export default function AccountPage() {
   return (
