@@ -38,7 +38,7 @@ public static class EquipmentEndpoints
             return Results.Created($"/api/equipment/{equipment.Id}", equipment);
         });
 
-        group.MapPut("/{id:int}", async (int id, CreateEquipmentRequest request, AppDbContext db) =>
+        group.MapPut("/{id:int}", async (int id, UpdateEquipmentRequest request, AppDbContext db) =>
         {
             var equipment = await db.Equipment.FindAsync(id);
             if (equipment is null)
@@ -48,6 +48,8 @@ public static class EquipmentEndpoints
             equipment.Manufacturer = request.Manufacturer;
             equipment.SerialNumber = request.SerialNumber;
             equipment.PurchaseDate = request.PurchaseDate;
+            equipment.ManufacturerDate = request.ManufacturerDate;
+            equipment.Description = request.Description;
 
             await db.SaveChangesAsync();
 
@@ -76,3 +78,12 @@ public record CreateEquipmentRequest(
     string? Manufacturer,
     string? SerialNumber,
     DateOnly? PurchaseDate);
+
+public record UpdateEquipmentRequest(
+    string Name,
+    string? Manufacturer,
+    string? SerialNumber,
+    DateOnly? PurchaseDate,
+    DateOnly? ManufacturerDate,
+    string? Description
+    );

@@ -51,7 +51,7 @@ export function EditEquipment({ equipment, onSaved }: EditEquipmentProps) {
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="manufacturer">Purchase Date:</label>
+        <label htmlFor="purchaseDate">Purchase Date:</label>
         <input
           id="purchaseDate"
           name="purchaseDate"
@@ -59,6 +59,28 @@ export function EditEquipment({ equipment, onSaved }: EditEquipmentProps) {
           maxLength={120}
           defaultValue={equipment.purchaseDate ?? ""}
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="manufacturer">Manufacture Date:</label>
+        <input
+          id="manufacturerDate"
+          name="manufacturerDate"
+          type="date"
+          maxLength={120}
+          defaultValue={equipment.manufacturerDate ?? ""}
+          className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          name="description"
+          rows={4}
+          cols={50}
+          maxLength={1200}
+          className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1 resize-none" >
+          {equipment.description}
+        </textarea>
       </div>
       <button
         type="submit"

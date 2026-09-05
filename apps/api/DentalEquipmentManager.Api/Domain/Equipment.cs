@@ -14,7 +14,11 @@ public class Equipment
 
     public string? SerialNumber { get; set; }
 
+    public string? Description { get; set; }
+
     public DateOnly? PurchaseDate { get; set; }
+
+    public DateOnly? ManufacturerDate { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }

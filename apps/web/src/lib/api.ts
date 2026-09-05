@@ -10,6 +10,8 @@ export interface Equipment {
   manufacturer: string | null;
   serialNumber: string | null;
   purchaseDate: string | null;
+  manufacturerDate: string | null;
+  description: string | null;
   createdAt: string;
 }
 
