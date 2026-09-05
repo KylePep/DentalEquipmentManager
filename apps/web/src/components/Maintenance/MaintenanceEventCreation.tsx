@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { Modal } from "../Layout/Modal";
 import { Equipment } from "@/lib/api";
-import { CreateEvent } from "./CreateEvent";
+import { CreateMaintenanceEvent } from "./CreateMaintenanceEvent";
 
 interface EventCreationProps {
   equipment: Equipment;
 }
 
-export function EventCreation({ equipment }: EventCreationProps) {
+export function MaintenanceEventCreation({ equipment }: EventCreationProps) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -20,7 +20,7 @@ export function EventCreation({ equipment }: EventCreationProps) {
         onClose={() => setOpen(false)}
         title={`Create a Maintenance Event for ${equipment.name}`}
       >
-        <CreateEvent equipmentId={equipment.id} />
+        <CreateMaintenanceEvent equipmentId={equipment.id} />
       </Modal>
     </>
   )

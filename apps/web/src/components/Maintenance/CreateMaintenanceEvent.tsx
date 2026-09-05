@@ -4,7 +4,7 @@ interface CreateEventProps {
   equipmentId: number;
 }
 
-export function CreateEvent({ equipmentId }: CreateEventProps) {
+export function CreateMaintenanceEvent({ equipmentId }: CreateEventProps) {
   const [pending, setPending] = useState(false);
 
   async function handleSubmit() { }

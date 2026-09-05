@@ -5,7 +5,7 @@ import { PageWrapper } from "@/components/Layout/PageWrapper";
 import { api } from "@/lib/api";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { EventCreation } from "@/components/Maintenance/EventCreation";
+import { MaintenanceEventCreation } from "@/components/Maintenance/MaintenanceEventCreation";
 
 export default async function EquipmentDetailPage({ params }: PageProps<'/equipment/[id]'>) {
   const { id } = await params;
@@ -81,7 +81,7 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
       <section>
         <div className="flex justify-between">
           <Heading level={2}>Maintenance</Heading>
-          <EventCreation equipment={equipment} />
+          <MaintenanceEventCreation equipment={equipment} />
         </div>
 
         <Heading level={3}>Warnings</Heading>
