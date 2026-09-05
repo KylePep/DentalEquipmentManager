@@ -26,9 +26,9 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
 
   return (
     <PageWrapper>
-      <pre>
+      {/* <pre>
         {JSON.stringify(equipment, null, 2)}
-      </pre>
+      </pre> */}
       <Heading level={1}>Equipment</Heading>
 
       <section>
@@ -40,7 +40,7 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
         <p>Purchase Date: {purchasedAt}</p>
         <p>Manufacture Date: {manufacturerDate}</p>
         <Image
-          className="w-1/2 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
+          className="w-48 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
           src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
           alt="dental chair"
           width={600}
