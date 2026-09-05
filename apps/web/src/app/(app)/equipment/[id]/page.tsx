@@ -1,11 +1,12 @@
 import { EquipmentEditor } from "@/components/Equipment/EquipmentEditor";
 import { Heading } from "@/components/Layout/Heading";
-import { MaintenanceCalendar } from "@/components/Maintenance/MaintenanceCalendar";
+import { CalendarEvent, MaintenanceCalendar } from "@/components/Maintenance/MaintenanceCalendar";
 import { PageWrapper } from "@/components/Layout/PageWrapper";
 import { api } from "@/lib/api";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MaintenanceEventCreation } from "@/components/Maintenance/MaintenanceEventCreation";
+import Link from "next/link";
 
 export default async function EquipmentDetailPage({ params }: PageProps<'/equipment/[id]'>) {
   const { id } = await params;
@@ -43,6 +44,18 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
   const manufacturerDate = equipment.manufacturerDate
     ? formatDateOnly(equipment.manufacturerDate)
     : "Missing Manufacture Date";
+
+  const calendarEvents: CalendarEvent[] = equipment.maintenanceEvents.map(
+    (event) => {
+      const [year, month, day] = event.date.split("-").map(Number);
+      const date = new Date(year, month - 1, day);
+      return {
+        id: event.id.toString(),
+        title: event.name,
+        start: new Date(date),
+        end: new Date(date),
+      }
+    });
 
   return (
     <PageWrapper>
@@ -86,17 +99,45 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
 
         <Heading level={3}>Warnings</Heading>
         <ul className="flex flex-col gap-2 mb-4">
-          <li className="border-b border-yellow-500"><span className="text-yellow-500">•</span> Drip pan tuning overdue</li>
-          <li className="border-b border-red-500"><span className="text-red-500">•</span> Sprockets may be misaligned</li>
+          {equipment.maintenanceEvents.map((event) => (
+            <li key={event.id} className="flex flex-col border-b">
+              <div>
+                <span>•</span> {event.name} - {event.date} - reoccurring - 1/month
+              </div>
+              <div className="flex gap-2 justify-end">
+                <div>
+                  <Link href={`/maintenance-events/${event.id}`} className="bg-green-800 text-white py-0 px-1 rounded text-xs hover:bg-green-950 hover:cursor-pointer duration-300 ease-in-out">Select</Link>
+                </div>
+                <div>
+                  <button className="bg-red-800 text-white py-0 px-1 rounded text-xs hover:bg-red-950 hover:cursor-pointer duration-300 ease-in-out">Dismiss</button>
+                </div>
+              </div>
+            </li>
+          ))}
         </ul>
         <Heading level={3}>Events</Heading>
         <ul className="flex flex-col gap-2 mb-4">
           {equipment.maintenanceEvents.map((event) => (
-            <li key={event.id} className="border-b"><span>•</span> {event.name} - {event.date} - reoccurring - 1/month</li>
+            <li key={event.id} className="flex flex-col border-b">
+              <div>
+                <span>•</span> {event.name} - {event.date} - reoccurring - 1/month
+              </div>
+              <div className="flex gap-2 justify-end">
+                <div>
+                  <Link href={`/maintenance-events/${event.id}`} className="bg-green-800 text-white py-0 px-1 rounded text-xs hover:bg-green-950 hover:cursor-pointer duration-300 ease-in-out">Select</Link>
+                </div>
+                <div>
+                  <button className="bg-yellow-800 text-white py-0 px-1 rounded text-xs hover:bg-yellow-950 hover:cursor-pointer duration-300 ease-in-out">Edit</button>
+                </div>
+                <div>
+                  <button className="bg-red-800 text-white py-0 px-1 rounded text-xs hover:bg-red-950 hover:cursor-pointer duration-300 ease-in-out">Delete</button>
+                </div>
+              </div>
+            </li>
           ))}
         </ul>
         <Heading level={3}>Schedule</Heading>
-        <MaintenanceCalendar />
+        <MaintenanceCalendar events={calendarEvents} />
       </section>
     </PageWrapper>
   )
