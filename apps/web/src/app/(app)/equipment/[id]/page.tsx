@@ -1,3 +1,4 @@
+import { EquipmentEditor } from "@/components/EquipmentEditor";
 import { Heading } from "@/components/Heading";
 import { MaintenanceCalendar } from "@/components/MaintenanceCalendar";
 import { PageWrapper } from "@/components/PageWrapper";
@@ -18,35 +19,62 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
   }
   if (!equipment) notFound();
 
-  const createdAt = equipment.createdAt ? `${new Date(equipment.createdAt).getMonth() + 1}/${new Date(equipment.createdAt).getDate()}/${new Date(equipment.createdAt).getFullYear()}` : "Missing Created At";
+  const formatDateTime = (dateString: string) => {
+    const date = new Date(dateString);
 
-  const purchasedAt = equipment.purchaseDate ? `${new Date(equipment.purchaseDate).getMonth() + 1}/${new Date(equipment.purchaseDate).getDate()}/${new Date(equipment.purchaseDate).getFullYear()}` : "Missing Purchase Date";
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  };
 
-  const manufacturerDate = equipment.manufacturerDate ? `${new Date(equipment.manufacturerDate).getMonth() + 1}/${new Date(equipment.manufacturerDate).getDate()}/${new Date(equipment.manufacturerDate).getFullYear()}` : "Missing Manufacture Date";
+  const formatDateOnly = (dateString: string) => {
+    const [year, month, day] = dateString.split("-");
+
+    return `${month}/${day}/${year}`;
+  };
+
+  const createdAt = equipment.createdAt
+    ? formatDateTime(equipment.createdAt)
+    : "Missing Created At";
+
+  const purchasedAt = equipment.purchaseDate
+    ? formatDateOnly(equipment.purchaseDate)
+    : "Missing Purchase Date";
+
+  const manufacturerDate = equipment.manufacturerDate
+    ? formatDateOnly(equipment.manufacturerDate)
+    : "Missing Manufacture Date";
 
   return (
     <PageWrapper>
-      <pre>
+      {/* <pre>
         {JSON.stringify(equipment, null, 2)}
-      </pre>
+      </pre> */}
       <Heading level={1}>Equipment</Heading>
 
       <section>
-        <Heading level={2}>Details</Heading>
-        <p>Created at: {createdAt}</p>
-        <p>Name: {equipment.name}</p>
-        <p>Manufacturer: {equipment.manufacturer ?? "Missing Manufacturer"}</p>
-        <p>Serial Number: {equipment.serialNumber ?? "Missing Serial Number"}</p>
-        <p>Purchase Date: {purchasedAt}</p>
-        <p>Manufacture Date: {manufacturerDate}</p>
-        <Image
-          className="w-48 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
-          src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
-          alt="dental chair"
-          width={600}
-          height={400}
-        />
-        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur nisi, amet consectetur aperiam earum dolores magni nobis, ipsam nihil, reiciendis debitis perferendis vitae ad nulla soluta tenetur hic vel!</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-2 rounded p-2 max-w-xl">
+          <div>
+            <Heading level={2}>Details</Heading>
+            <p>Created at: {createdAt}</p>
+            <p>Name: {equipment.name}</p>
+            <p>Manufacturer: {equipment.manufacturer ?? "Missing Manufacturer"}</p>
+            <p>Serial Number: {equipment.serialNumber ?? "Missing Serial Number"}</p>
+            <p>Purchase Date: {purchasedAt}</p>
+            <p>Manufacture Date: {manufacturerDate}</p>
+          </div>
+          <div className="flex justify-start md:justify-end">
+            <Image
+              className="w-48 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
+              src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
+              alt="dental chair"
+              width={600}
+              height={400}
+            />
+          </div>
+          <div className="md:col-span-2">
+            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur nisi, amet consectetur aperiam earum dolores magni nobis, ipsam nihil, reiciendis debitis perferendis vitae ad nulla soluta tenetur hic vel!</p>
+          </div>
+          <EquipmentEditor equipment={equipment} />
+        </div>
       </section>
 
       <section>

@@ -77,9 +77,9 @@ export function EditEquipment({ equipment, onSaved }: EditEquipmentProps) {
           name="description"
           rows={4}
           cols={50}
+          defaultValue={equipment.description ?? ""}
           maxLength={1200}
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1 resize-none" >
-          {equipment.description}
         </textarea>
       </div>
       <button
