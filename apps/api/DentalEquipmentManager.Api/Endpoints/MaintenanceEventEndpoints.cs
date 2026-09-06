@@ -1,3 +1,4 @@
+using DentalEquipmentManager.Api.Contracts;
 using DentalEquipmentManager.Api.Data;
 using DentalEquipmentManager.Api.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,10 @@ public static class MaintenanceEventEndpoints
     var group = routes.MapGroup("/api/maintenance-events").WithTags("MaintenanceEvent");
 
     group.MapGet("/", async (AppDbContext db) =>
-    await db.MaintenanceEvents.OrderBy(e => e.Name).ToListAsync());
+    await db.MaintenanceEvents
+      .OrderBy(e => e.Title)
+      .Select(ContractMappings.ToMaintenanceEventDto)
+      .ToListAsync());
 
     group.MapPost("/", async (CreateEventRequest request, AppDbContext db) =>
     {
@@ -27,15 +31,18 @@ public static class MaintenanceEventEndpoints
       var maintenanceEvent = new MaintenanceEvent
       {
         EquipmentId = request.EquipmentId,
-        Name = request.Name,
-        Date = request.Date,
+        Title = request.Title,
         Description = request.Description,
+        Start = request.Start,
+        End = request.End,
+        Reoccur = request.Reoccur,
+        Occurrence = request.Occurrence
       };
 
       db.MaintenanceEvents.Add(maintenanceEvent);
       await db.SaveChangesAsync();
 
-      return Results.Created($"/api/maintenance-events/{maintenanceEvent.Id}", maintenanceEvent);
+      return Results.Created($"/api/maintenance-events/{maintenanceEvent.Id}", maintenanceEvent.ToDto());
     });
 
     return routes;
@@ -44,7 +51,10 @@ public static class MaintenanceEventEndpoints
 
 public record CreateEventRequest(
   int EquipmentId,
-  string Name,
-  DateOnly? Date,
-  string? Description
+  string Title,
+  string? Description,
+  DateOnly Start,
+  DateOnly End,
+  bool Reoccur,
+  string? Occurrence
 );

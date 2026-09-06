@@ -13,15 +13,21 @@ export interface Equipment {
   manufacturerDate: string | null;
   description: string | null;
   createdAt: string;
+}
+
+export interface EquipmentDetail extends Equipment {
   maintenanceEvents: MaintenanceEvent[];
 }
 
 export interface MaintenanceEvent {
   id: number;
   equipmentId: number;
-  name: string;
+  title: string;
   description: string | null;
-  date: string;
+  start: string;
+  end: string;
+  reoccur: boolean;
+  occurrence: string;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -44,7 +50,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
   listEquipment: () => request<Equipment[]>("/api/equipment"),
-  getEquipment: (id: number) => request<Equipment>(`/api/equipment/${id}`),
+  getEquipment: (id: number) => request<EquipmentDetail>(`/api/equipment/${id}`),
   createEquipment: (equipment: Omit<Equipment, "id" | "createdAt">) =>
     request<Equipment>("/api/equipment", {
       method: "POST",

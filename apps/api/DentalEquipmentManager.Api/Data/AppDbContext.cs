@@ -23,7 +23,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithMany(e => e.MaintenanceEvents)
             .HasForeignKey(e => e.EquipmentId);
 
-            entity.Property(e => e.Name).HasMaxLength(200).IsRequired();
+            entity.Property(e => e.Title).HasMaxLength(200).IsRequired();
             entity.Property(e => e.Description).HasMaxLength(1200);
         });
     }

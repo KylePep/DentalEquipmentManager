@@ -1,3 +1,4 @@
+using DentalEquipmentManager.Api.Contracts;
 using DentalEquipmentManager.Api.Data;
 using DentalEquipmentManager.Api.Domain;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,10 @@ public static class EquipmentEndpoints
         var group = routes.MapGroup("/api/equipment").WithTags("Equipment");
 
         group.MapGet("/", async (AppDbContext db) =>
-            await db.Equipment.OrderBy(e => e.Name).ToListAsync());
+            await db.Equipment
+            .OrderBy(e => e.Name)
+            .Select(ContractMappings.ToEquipmentSummaryDto)
+            .ToListAsync());
 
         group.MapGet("/{id:int}", async (int id, AppDbContext db) =>
         {
@@ -21,7 +25,7 @@ public static class EquipmentEndpoints
             .FirstOrDefaultAsync(e => e.Id == id);
 
             return equipment is not null
-            ? Results.Ok(equipment)
+            ? Results.Ok(equipment.ToDetailDto())
             : Results.NotFound();
 
         });
@@ -39,7 +43,7 @@ public static class EquipmentEndpoints
             db.Equipment.Add(equipment);
             await db.SaveChangesAsync();
 
-            return Results.Created($"/api/equipment/{equipment.Id}", equipment);
+            return Results.Created($"/api/equipment/{equipment.Id}", equipment.ToSummaryDto());
         });
 
         group.MapPut("/{id:int}", async (int id, UpdateEquipmentRequest request, AppDbContext db) =>
@@ -57,7 +61,7 @@ public static class EquipmentEndpoints
 
             await db.SaveChangesAsync();
 
-            return Results.Ok(equipment);
+            return Results.Ok(equipment.ToSummaryDto());
         });
 
         group.MapDelete("/{id:int}", async (int id, AppDbContext db) =>

@@ -1,6 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
-using DentalEquipmentManager.Api.Domain;
+using DentalEquipmentManager.Api.Contracts;
 using FluentAssertions;
 
 namespace DentalEquipmentManager.Api.Tests;
@@ -24,7 +24,7 @@ public class EquipmentApiTests(PostgresApiFactory factory) : IClassFixture<Postg
 
         create.StatusCode.Should().Be(HttpStatusCode.Created);
 
-        var list = await _client.GetFromJsonAsync<List<Equipment>>("/api/equipment");
+        var list = await _client.GetFromJsonAsync<List<EquipmentSummaryDto>>("/api/equipment");
 
         list.Should().ContainSingle(e => e.Name == "Autoclave 3000" && e.Manufacturer == "SteriCo");
     }

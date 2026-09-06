@@ -47,11 +47,11 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
 
   const calendarEvents: CalendarEvent[] = equipment.maintenanceEvents.map(
     (event) => {
-      const [year, month, day] = event.date.split("-").map(Number);
+      const [year, month, day] = event.start.split("-").map(Number);
       const date = new Date(year, month - 1, day);
       return {
         id: event.id.toString(),
-        title: event.name,
+        title: event.title,
         start: new Date(date),
         end: new Date(date),
       }
@@ -59,9 +59,9 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
 
   return (
     <PageWrapper>
-      <pre>
+      {/* <pre>
         {JSON.stringify(equipment, null, 2)}
-      </pre>
+      </pre> */}
       <Heading level={1}>Equipment</Heading>
 
       <section>
@@ -97,7 +97,7 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
           <MaintenanceEventCreation equipment={equipment} />
         </div>
 
-        <Heading level={3}>Warnings</Heading>
+        {/* <Heading level={3}>Warnings</Heading>
         <ul className="flex flex-col gap-2 mb-4">
           {equipment.maintenanceEvents.map((event) => (
             <li key={event.id} className="flex flex-col border-b">
@@ -114,13 +114,14 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
               </div>
             </li>
           ))}
-        </ul>
+        </ul> */}
+
         <Heading level={3}>Events</Heading>
         <ul className="flex flex-col gap-2 mb-4">
           {equipment.maintenanceEvents.map((event) => (
             <li key={event.id} className="flex flex-col border-b">
               <div>
-                <span>•</span> {event.name} - {event.date} - reoccurring - 1/month
+                <span>•</span> {event.title} - {event.start} - reoccurring - 1/month
               </div>
               <div className="flex gap-2 justify-end">
                 <div>

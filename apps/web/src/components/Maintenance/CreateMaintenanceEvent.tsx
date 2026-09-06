@@ -7,7 +7,12 @@ interface CreateEventProps {
 }
 
 export function CreateMaintenanceEvent({ equipmentId, onSaved }: CreateEventProps) {
+  const [reoccurring, setReoccurring] = useState(false);
   const [pending, setPending] = useState(false);
+
+  const handleReoccur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setReoccurring(e.target.checked);
+  };
 
   async function handleSubmit(formData: FormData) {
     setPending(true);
@@ -20,10 +25,10 @@ export function CreateMaintenanceEvent({ equipmentId, onSaved }: CreateEventProp
   return (
     <form action={handleSubmit} className="flex flex-col gap-4 p-4 bg-stone-800 rounded max-w-xl">
       <div className="flex flex-col gap-1">
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="title">Title:</label>
         <input
-          id="name"
-          name="name"
+          id="title"
+          name="title"
           type="text"
           maxLength={120}
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
@@ -40,21 +45,54 @@ export function CreateMaintenanceEvent({ equipmentId, onSaved }: CreateEventProp
         </textarea>
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="date">Date:</label>
+        <label htmlFor="start">Start:</label>
         <input
-          id="date"
-          name="date"
+          id="start"
+          name="start"
+          type="date"
+          required
+          maxLength={120}
+          className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
+      </div>
+      <div className="flex flex-col gap-1">
+        <label htmlFor="end">End:</label>
+        <input
+          id="end"
+          name="end"
           type="date"
           required
           maxLength={120}
           className="bg-stone-900 text-white placeholder:text-gray-500 rounded px-1" />
       </div>
 
+      <div className="flex flex-col items-start gap-1">
+        <label htmlFor="reoccur">Reoccur:</label>
+        <input
+          id="reoccur"
+          name="reoccur"
+          type="checkbox"
+          defaultChecked={reoccurring}
+          onChange={handleReoccur}
+        />
+      </div>
+
+      {reoccurring && (
+        <div className="flex flex-col gap-1">
+          <label htmlFor="occurrence">Occurrence:</label>
+          <select name="occurrence" id="occurrence">
+            <option value="weekly">weekly</option>
+            <option value="monthly">monthly - day</option>
+            <option value="monthly">monthly - date</option>
+            <option value="yearly">yearly</option>
+          </select>
+        </div>
+      )}
+
       <button
         type="submit"
         disabled={pending}
         className="font-bold bg-blue-800 rounded p-2 hover:bg-blue-900 duration-300 ease-in-out">
-        {pending ? "Saving..." : "Save changes"}
+        {pending ? "Saving..." : "Create Event"}
       </button>
     </form>
   )

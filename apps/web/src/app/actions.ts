@@ -36,9 +36,12 @@ export async function CreateMaintenanceEventAction(formData: FormData) {
   const equipmentId = Number(formData.get("equipmentId"));
   await api.createMaintenanceEvent({
     equipmentId,
-    name: String(formData.get("name")),
-    date: String(formData.get("date")),
-    description: String(formData.get("description")),
+    title: String(formData.get("title")),
+    description: (formData.get("description") as string | null) || null,
+    start: String(formData.get("start")),
+    end: String(formData.get("end")),
+    reoccur: formData.get("reoccur") === "on",
+    occurrence: String(formData.get("occurrence") ?? "once"),
   });
   revalidatePath(`/equipment/${equipmentId}`);
 }
