@@ -1,7 +1,10 @@
+import { BackLink } from "@/components/Layout/BackLink";
 import { Heading } from "@/components/Layout/Heading";
 import { PageWrapper } from "@/components/Layout/PageWrapper";
 import { MaintenanceEventEditor } from "@/components/Maintenance/MaintenanceEventEditor";
 import { api } from "@/lib/api";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function maintenanceEventPage({ params }: PageProps<'/maintenance-events/[id]'>) {
@@ -43,7 +46,10 @@ export default async function maintenanceEventPage({ params }: PageProps<'/maint
 
   return (
     <PageWrapper>
-      <Heading level={1}>Maintenance Event Details</Heading>
+      <div className="flex flex-col gap-2">
+        <BackLink href={`/equipment/${maintenanceEvent.equipmentId}`} label="Back to equipment" />
+        <Heading level={1}>Maintenance Event Details</Heading>
+      </div>
       {/* <pre>
         {JSON.stringify(maintenanceEvent, null, 2)}
       </pre> */}

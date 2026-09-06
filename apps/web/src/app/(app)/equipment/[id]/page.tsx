@@ -8,6 +8,7 @@ import { MaintenanceEventCreation } from "@/components/Maintenance/MaintenanceEv
 import Link from "next/link";
 import { ManageEquipment } from "@/components/Equipment/ManageEquipment";
 import { ArrowLeft } from "lucide-react";
+import { BackLink } from "@/components/Layout/BackLink";
 
 export default async function EquipmentDetailPage({ params }: PageProps<'/equipment/[id]'>) {
   const { id } = await params;
@@ -75,12 +76,9 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
         {/* <pre>
         {JSON.stringify(equipment, null, 2)}
       </pre> */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-2">
+          <BackLink label="Back to equipment list" href={"/equipment"} />
           <Heading level={1}>Equipment</Heading>
-          <Link href={"/equipment"} className="flex gap-2">
-            <ArrowLeft />
-            Back to equipment list
-          </Link>
         </div>
 
         <section>
