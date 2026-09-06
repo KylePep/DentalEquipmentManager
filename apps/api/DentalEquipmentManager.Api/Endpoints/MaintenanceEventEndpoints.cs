@@ -55,6 +55,24 @@ public static class MaintenanceEventEndpoints
       return Results.Created($"/api/maintenance-events/{maintenanceEvent.Id}", maintenanceEvent.ToDto());
     });
 
+    group.MapPut("/{id:int}", async (int id, UpdateEventRequest request, AppDbContext db) =>
+    {
+      var maintenanceEvent = await db.MaintenanceEvents.FindAsync(id);
+      if (maintenanceEvent is null)
+        return Results.NotFound();
+
+      maintenanceEvent.Title = request.Title;
+      maintenanceEvent.Description = request.Description;
+      maintenanceEvent.Start = request.Start;
+      maintenanceEvent.End = request.End;
+      maintenanceEvent.Reoccur = request.Reoccur;
+      maintenanceEvent.Occurrence = request.Occurrence;
+
+      await db.SaveChangesAsync();
+
+      return Results.Ok(maintenanceEvent.ToDto());
+    });
+
     return routes;
   }
 }
@@ -63,6 +81,15 @@ public record CreateEventRequest(
   int EquipmentId,
   string Title,
   string? Description,
+  DateOnly Start,
+  DateOnly End,
+  bool Reoccur,
+  string? Occurrence
+);
+
+public record UpdateEventRequest(
+  string Title,
+  string Description,
   DateOnly Start,
   DateOnly End,
   bool Reoccur,

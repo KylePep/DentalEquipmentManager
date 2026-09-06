@@ -1,4 +1,3 @@
-import { EquipmentEditor } from "@/components/Equipment/EquipmentEditor";
 import { Heading } from "@/components/Layout/Heading";
 import { CalendarEvent, MaintenanceCalendar } from "@/components/Maintenance/MaintenanceCalendar";
 import { PageWrapper } from "@/components/Layout/PageWrapper";
@@ -7,6 +6,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MaintenanceEventCreation } from "@/components/Maintenance/MaintenanceEventCreation";
 import Link from "next/link";
+import { ManageEquipment } from "@/components/Equipment/ManageEquipment";
+import { ArrowLeft } from "lucide-react";
 
 export default async function EquipmentDetailPage({ params }: PageProps<'/equipment/[id]'>) {
   const { id } = await params;
@@ -20,6 +21,8 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
     return <PageWrapper><p role="alert">Could no reach the API...</p></PageWrapper>;
   }
   if (!equipment) notFound();
+
+
 
   const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -67,46 +70,55 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
     });
 
   return (
-    <PageWrapper>
-      {/* <pre>
+    <>
+      <PageWrapper>
+        {/* <pre>
         {JSON.stringify(equipment, null, 2)}
       </pre> */}
-      <Heading level={1}>Equipment</Heading>
-
-      <section>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-2 rounded p-2 max-w-xl">
-          <div>
-            <Heading level={2}>Details</Heading>
-            <p>Created at: {createdAt}</p>
-            <p>Name: {equipment.name}</p>
-            <p>Manufacturer: {equipment.manufacturer ?? "Missing Manufacturer"}</p>
-            <p>Serial Number: {equipment.serialNumber ?? "Missing Serial Number"}</p>
-            <p>Purchase Date: {purchasedAt}</p>
-            <p>Manufacture Date: {manufacturerDate}</p>
-          </div>
-          <div className="flex justify-start md:justify-end">
-            <Image
-              className="w-48 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
-              src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
-              alt="dental chair"
-              width={600}
-              height={400}
-            />
-          </div>
-          <div className="md:col-span-2">
-            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur nisi, amet consectetur aperiam earum dolores magni nobis, ipsam nihil, reiciendis debitis perferendis vitae ad nulla soluta tenetur hic vel!</p>
-          </div>
-          <EquipmentEditor equipment={equipment} />
-        </div>
-      </section>
-
-      <section>
-        <div className="flex justify-between">
-          <Heading level={2}>Maintenance</Heading>
-          <MaintenanceEventCreation equipment={equipment} />
+        <div className="flex justify-between items-center">
+          <Heading level={1}>Equipment</Heading>
+          <Link href={"/equipment"} className="flex gap-2">
+            <ArrowLeft />
+            Back to equipment list
+          </Link>
         </div>
 
-        {/* <Heading level={3}>Warnings</Heading>
+        <section>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-2 rounded p-2 max-w-xl">
+            <div>
+              <Heading level={2}>Details</Heading>
+              <p>Created at: {createdAt}</p>
+              <p>Name: {equipment.name}</p>
+              <p>Manufacturer: {equipment.manufacturer ?? "Missing Manufacturer"}</p>
+              <p>Serial Number: {equipment.serialNumber ?? "Missing Serial Number"}</p>
+              <p>Purchase Date: {purchasedAt}</p>
+              <p>Manufacture Date: {manufacturerDate}</p>
+            </div>
+            <div className="flex justify-start md:justify-end">
+              <Image
+                className="w-48 rounded-lg border-4 border-stone-700 shadow shadow-stone-900"
+                src={"https://www.fsroson.com/wp-content/uploads/2024/08/FS06-Olive-green.jpg"}
+                alt="dental chair"
+                width={600}
+                height={400}
+              />
+            </div>
+            <div className="md:col-span-2">
+              <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab consequuntur nisi, amet consectetur aperiam earum dolores magni nobis, ipsam nihil, reiciendis debitis perferendis vitae ad nulla soluta tenetur hic vel!</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <ManageEquipment equipment={equipment} />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="flex justify-between">
+            <Heading level={2}>Maintenance</Heading>
+            <MaintenanceEventCreation equipment={equipment} />
+          </div>
+
+          {/* <Heading level={3}>Warnings</Heading>
         <ul className="flex flex-col gap-2 mb-4">
           {equipment.maintenanceEvents.map((event) => (
             <li key={event.id} className="flex flex-col border-b">
@@ -125,30 +137,21 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
           ))}
         </ul> */}
 
-        <Heading level={3}>Events</Heading>
-        <ul className="flex flex-col gap-2 mb-4">
-          {equipment.maintenanceEvents.map((event) => (
-            <li key={event.id} className="flex flex-col border-b">
-              <div>
-                <span>•</span> {event.title} - {event.start} - {event.reoccur ? "Reoccurring" : "Once"} - {event.occurrence}
-              </div>
-              <div className="flex gap-2 justify-end">
-                <div>
-                  <Link href={`/maintenance-events/${event.id}`} className="bg-green-800 text-white py-0 px-1 rounded text-xs hover:bg-green-950 hover:cursor-pointer duration-300 ease-in-out">Select</Link>
-                </div>
-                <div>
-                  <button className="bg-yellow-800 text-white py-0 px-1 rounded text-xs hover:bg-yellow-950 hover:cursor-pointer duration-300 ease-in-out">Edit</button>
-                </div>
-                <div>
-                  <button className="bg-red-800 text-white py-0 px-1 rounded text-xs hover:bg-red-950 hover:cursor-pointer duration-300 ease-in-out">Delete</button>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <Heading level={3}>Schedule</Heading>
-        <MaintenanceCalendar events={calendarEvents} />
-      </section>
-    </PageWrapper>
+          <Heading level={3}>Events</Heading>
+          <ul className="flex flex-col gap-2 mb-4">
+            {equipment.maintenanceEvents.map((event) => (
+              <li key={event.id} className="flex flex-col border-b">
+                <Link href={`/maintenance-events/${event.id}`} className="bg-stone-800 text-white py-0 px-1 rounded text-xs hover:bg-stone-950 hover:cursor-pointer duration-300 ease-in-out">
+                  <span>•</span> {event.title} - {event.start} - {event.reoccur ? "Reoccurring" : "Once"} - {event.occurrence}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Heading level={3}>Schedule</Heading>
+          <MaintenanceCalendar events={calendarEvents} />
+        </section>
+      </PageWrapper>
+
+    </>
   )
 }

@@ -74,5 +74,10 @@ export const api = {
       method: "POST",
       body: JSON.stringify(maintenanceEvent),
     }),
+  updateMaintenanceEvent: (id: number, maintenanceEvent: Omit<MaintenanceEvent, "id" | "createdAt" | "equipmentId">) =>
+    request<MaintenanceEvent>(`/api/maintenance-events/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(maintenanceEvent),
+    }),
   health: () => request<{ status: string }>("/health"),
 };

@@ -22,7 +22,7 @@ export function EquipmentEditor({ equipment }: EquipmentEditorProps) {
         Edit {equipment.name}
       </button>
 
-      <Modal isOpen={open} onClose={() => setOpen(false)} title="Create Equipment">
+      <Modal isOpen={open} onClose={() => setOpen(false)} title="Edit Equipment">
         <EditEquipment equipment={equipment} onSaved={() => setOpen(false)} />
       </Modal>
     </>

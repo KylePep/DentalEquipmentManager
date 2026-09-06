@@ -45,3 +45,15 @@ export async function CreateMaintenanceEventAction(formData: FormData) {
   });
   revalidatePath(`/equipment/${equipmentId}`);
 }
+
+export async function updateMaintenanceEventAction(maintenanceEventId: number, formData: FormData) {
+  await api.updateMaintenanceEvent(maintenanceEventId, {
+    title: String(formData.get("title")),
+    description: (formData.get("description") as string | null) || null,
+    start: String(formData.get("start")),
+    end: String(formData.get("end")),
+    reoccur: formData.get("reoccur") === "on",
+    occurrence: String(formData.get("occurrence") ?? "once"),
+  });
+  revalidatePath(`/maintenance-events/${maintenanceEventId}`)
+}

@@ -1,5 +1,6 @@
 import { Heading } from "@/components/Layout/Heading";
 import { PageWrapper } from "@/components/Layout/PageWrapper";
+import { MaintenanceEventEditor } from "@/components/Maintenance/MaintenanceEventEditor";
 import { api } from "@/lib/api";
 import { notFound } from "next/navigation";
 
@@ -42,7 +43,7 @@ export default async function maintenanceEventPage({ params }: PageProps<'/maint
 
   return (
     <PageWrapper>
-      <Heading level={1}>Maintenance Event</Heading>
+      <Heading level={1}>Maintenance Event Details</Heading>
       {/* <pre>
         {JSON.stringify(maintenanceEvent, null, 2)}
       </pre> */}
@@ -50,9 +51,8 @@ export default async function maintenanceEventPage({ params }: PageProps<'/maint
       <section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-2 rounded p-2 max-w-xl">
           <div>
-            <Heading level={2}>Details</Heading>
+            <Heading level={2}>{maintenanceEvent.title}</Heading>
             <p>Created at: {createdAt}</p>
-            <p>Title: {maintenanceEvent.title}</p>
             <p>Start: {startDate}</p>
             <p>End: {endDate}</p>
             <p>Type: {maintenanceEvent.reoccur ? "Reoccurring" : "Once"}</p>
@@ -61,6 +61,7 @@ export default async function maintenanceEventPage({ params }: PageProps<'/maint
           <div className="md:col-span-2">
             <p>Description: {maintenanceEvent.description}</p>
           </div>
+          <MaintenanceEventEditor maintenanceEvent={maintenanceEvent} />
         </div>
       </section>
     </PageWrapper>
