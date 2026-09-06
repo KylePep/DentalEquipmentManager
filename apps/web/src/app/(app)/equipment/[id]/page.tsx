@@ -45,15 +45,24 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
     ? formatDateOnly(equipment.manufacturerDate)
     : "Missing Manufacture Date";
 
+  const parseDateOnly = (value: string) => {
+    const [year, month, day] = value.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  };
+
   const calendarEvents: CalendarEvent[] = equipment.maintenanceEvents.map(
     (event) => {
-      const [year, month, day] = event.start.split("-").map(Number);
-      const date = new Date(year, month - 1, day);
+      const start = parseDateOnly(event.start);
+      const end = parseDateOnly(event.end ?? event.start);
+      // react-big-calendar treats an all-day event's end as exclusive at day
+      // granularity, so bump it to the next day to cover the final date.
+      end.setDate(end.getDate() + 1);
       return {
         id: event.id.toString(),
         title: event.title,
-        start: new Date(date),
-        end: new Date(date),
+        start,
+        end,
+        allDay: true,
       }
     });
 
@@ -121,7 +130,7 @@ export default async function EquipmentDetailPage({ params }: PageProps<'/equipm
           {equipment.maintenanceEvents.map((event) => (
             <li key={event.id} className="flex flex-col border-b">
               <div>
-                <span>•</span> {event.title} - {event.start} - reoccurring - 1/month
+                <span>•</span> {event.title} - {event.start} - {event.reoccur ? "Reoccurring" : "Once"} - {event.occurrence}
               </div>
               <div className="flex gap-2 justify-end">
                 <div>

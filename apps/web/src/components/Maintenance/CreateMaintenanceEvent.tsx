@@ -81,8 +81,8 @@ export function CreateMaintenanceEvent({ equipmentId, onSaved }: CreateEventProp
           <label htmlFor="occurrence">Occurrence:</label>
           <select name="occurrence" id="occurrence">
             <option value="weekly">weekly</option>
-            <option value="monthly">monthly - day</option>
-            <option value="monthly">monthly - date</option>
+            <option value="monthly-day">monthly - day</option>
+            <option value="monthly-date">monthly - date</option>
             <option value="yearly">yearly</option>
           </select>
         </div>

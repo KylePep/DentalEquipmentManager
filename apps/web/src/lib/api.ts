@@ -25,7 +25,7 @@ export interface MaintenanceEvent {
   title: string;
   description: string | null;
   start: string;
-  end: string;
+  end: string | null;
   reoccur: boolean;
   occurrence: string;
 }
