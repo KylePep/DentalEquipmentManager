@@ -28,6 +28,7 @@ export interface MaintenanceEvent {
   end: string | null;
   reoccur: boolean;
   occurrence: string;
+  createdAt: string;
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
@@ -67,6 +68,7 @@ export const api = {
     }),
 
   // Maintenance Event
+  getMaintenanceEvent: (id: number) => request<MaintenanceEvent>(`/api/maintenance-events/${id}`),
   createMaintenanceEvent: (maintenanceEvent: Omit<MaintenanceEvent, "id" | "createdAt">) =>
     request<MaintenanceEvent>("/api/maintenance-events", {
       method: "POST",

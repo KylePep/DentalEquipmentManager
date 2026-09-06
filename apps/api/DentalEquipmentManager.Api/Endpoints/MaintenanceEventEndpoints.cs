@@ -17,6 +17,16 @@ public static class MaintenanceEventEndpoints
       .Select(ContractMappings.ToMaintenanceEventDto)
       .ToListAsync());
 
+    group.MapGet("/{id:int}", async (int id, AppDbContext db) =>
+    {
+      var maintenanceEvent = await db.MaintenanceEvents
+      .FirstOrDefaultAsync(me => me.Id == id);
+
+      return maintenanceEvent is not null
+      ? Results.Ok(maintenanceEvent.ToDto())
+      : Results.NotFound();
+    });
+
     group.MapPost("/", async (CreateEventRequest request, AppDbContext db) =>
     {
       var equipmentExists = await db.Equipment.AnyAsync(e => e.Id == request.EquipmentId);
