@@ -1,14 +1,20 @@
 using DentalEquipmentManager.Api.Data;
-using DentalEquipmentManager.Api.Endpoints;
+using DentalEquipmentManager.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+// Scoped to match the AppDbContext lifetime they depend on.
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IMaintenanceEventService, MaintenanceEventService>();
 
 const string WebAppCorsPolicy = "WebApp";
 builder.Services.AddCors(options =>
@@ -28,8 +34,7 @@ app.UseHttpsRedirection();
 app.UseCors(WebAppCorsPolicy);
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" })).WithTags("Health");
-app.MapEquipmentEndpoints();
-app.MapMaintenanceEventEndpoints();
+app.MapControllers();
 
 app.Run();
 
